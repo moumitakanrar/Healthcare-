@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>KGEC HEALTHCARE</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  
+  <style>    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">HEALTHCARE DAPP
+     </a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+
+          <li><li><a href="#"><i  class="text-info">M.TECH PROJECT BY MOUMITA KANRAR</i></a></li>
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">Messages</a></li>
+        
+      
+      </ul>
+      <!--
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group input-group">
+          <input type="text" class="form-control" placeholder="Search..">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+          </span>        
+        </div>
+      </form>-->
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> My Address[ <i id="myAddress" class="text-info"></i>]</a></li>
+       
+      </ul>
+    </div>
+  </div>
+</nav>
+  
+<div class="container text-center">    
+  <div class="row">
+    <div class="col-sm-3 well">
+      <div class="well">
+        <p>My Profile</p>
+        <p>Balance: <i id="myBalance"></i></p>
+      </div>
+      <div class="well">
+        <p><a href="#">Interests</a></p>
+        <p>
+          <span class="label label-default">News</span>
+          <span class="label label-primary">W3Schools</span>
+          <span class="label label-success">Labels</span>
+          <span class="label label-info">Football</span>
+          <span class="label label-warning">Gaming</span>
+          <span class="label label-danger">Friends</span>
+        </p>
+      </div>
+      <div class="alert alert-success fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+        <p><strong>Ey!</strong></p>
+        People are looking at your profile. Find out who.
+      </div>
+      <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p>
+    </div>
+    <div class="col-sm-7">
+    
+      <div class="row dashboard-1">
+        <div class="col-sm-12">
+          <div class="panel panel-default text-left">
+            <div class="panel-heading">Patient Registration</div>
+            <div class="panel-body">              
+              <form id="addPatForm">
+                <div class="form-group">
+                  <label for="patAddress">Patient address:</label>
+                  <input type="text" class="form-control" id="patAddress">
+                </div>                
+                <div class="form-group">
+                  <label for="patAadhar">Aadhaar:</label>
+                  <input type="number" class="form-control" id="patAadhar">
+                </div>              
+                
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form>
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <div class="panel panel-default text-left">
+            <div class="panel-heading">Doctor Registration</div>
+            <div class="panel-body">              
+              <form id="addDoctorForm">
+                <div class="form-group">
+                  <label for="docAddr">Doctor address:</label>
+                  <input type="text" class="form-control" id="docAddr">
+                </div>  
+                <div class="form-group">
+                  <label for="docName">Doctor Name:</label>
+                  <input type="text" class="form-control" id="docName">
+                </div>  
+                <div class="form-group">
+                  <label for="docRegNo">Doctor Regn. No:</label>
+                  <input type="text" class="form-control" id="docRegNo">
+                </div>  
+                <div class="form-group">
+                  <label for="medCouncilName">Medical CouncilName:</label>
+                  <input type="text" class="form-control" id="medCouncilName">
+                </div>  
+                <div class="form-group">
+                  <label for="areaExpertize">Area of Expertize:</label>
+                  <input type="text" class="form-control" id="areaExpertize">
+                </div>                
+                <div class="form-group">
+                  <label for="docContactNo">Contact No:</label>
+                  <input type="number" class="form-control" id="docContactNo">
+                </div>              
+                
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form>
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <div class="panel panel-default text-left">
+            <div class="panel-heading">Pharmacy Registration</div>
+            <div class="panel-body">              
+              <form id="addPharmacyForm">
+                <div class="form-group">
+                  <label for="pharmAddr">Pharmacy address:</label>
+                  <input type="text" class="form-control" id="pharmAddr">
+                </div>   
+                <div class="form-group">
+                  <label for="pharmRegNo">Pharmacy Regn. No:</label>
+                  <input type="text" class="form-control" id="pharmRegNo">
+                </div>   
+                <div class="form-group">
+                  <label for="pharmName">Pharmacy Name:</label>
+                  <input type="text" class="form-control" id="pharmName">
+                </div>                
+                <div class="form-group">
+                  <label for="pharmContactNo">Contact No:</label>
+                  <input type="number" class="form-control" id="pharmContactNo">
+                </div>              
+                
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row  dashboard-2">
+        <div class="col-sm-12">
+          <div class="panel panel-default text-left">
+            <div class="panel-heading">Patient OTP Reset</div>
+            <div class="panel-body">              
+              <form id="patientOtpReset">
+                <div class="form-group">
+                  <label for="patOTP1">Patient OTP:</label>
+                  <input type="text" class="form-control" id="patOTP1">
+                </div>              
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <div class="panel panel-default text-left">
+            <div class="panel-heading">Prescription OTP Reset</div>
+            <div class="panel-body">              
+              <form id="prescriptionOtpReset">
+                <div class="form-group">
+                  <label for="docAddress1">Doctor Address:</label>
+                  <input type="text" class="form-control" id="docAddress1">
+                </div>
+                <div class="form-group">
+                  <label for="prescriptionId1">Prescription ID:</label>
+                  <input type="text" class="form-control" id="prescriptionId1">
+                </div>
+                <div class="form-group">
+                  <label for="prescriptionOTP1">Prescription OTP:</label>
+                  <input type="text" class="form-control" id="prescriptionOTP1">
+                </div>           
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <div class="panel panel-default text-left">
+            <div class="panel-heading">Add Authorized Person</div>
+            <div class="panel-body">              
+              <form id="addAuthorizedPerson">
+                <div class="form-group">
+                  <label for="docAddress2">Doctor Address:</label>
+                  <input type="text" class="form-control" id="docAddress2">
+                </div>
+                <div class="form-group">
+                  <label for="prescriptionId2">Prescription ID:</label>
+                  <input type="text" class="form-control" id="prescriptionId2">
+                </div>
+                <div class="form-group">
+                  <label for="prescriptionOTP1">Authorized Person Address:</label>
+                  <input type="text" class="form-control" id="prescriptionOTP1">
+                </div>           
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div> 
+
+      <div class="row  dashboard-3">
+        <div class="col-sm-12">
+          <div class="panel panel-default text-left">
+            <div class="panel-heading">Patient OTP Reset</div>
+            <div class="panel-body">              
+              <form id="patientOtpReset">
+                <div class="form-group">
+                  <label for="OTP">Patient OTP:</label>
+                  <input type="text" class="form-control" id="patOTP">
+                </div>              
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <div class="panel panel-default text-left">
+            <div class="panel-heading">Prescription OTP Reset</div>
+            <div class="panel-body">              
+              <form id="prescriptionOtpReset">
+                <div class="form-group">
+                  <label for="OTP">Prescription OTP:</label>
+                  <input type="text" class="form-control" id="patPrescriptionOTP">
+                </div>              
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div> 
+
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="well">
+           <p>John</p>
+           <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
+          </div>
+        </div>
+        <div class="col-sm-9">
+          <div class="well">
+            <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="well">
+           <p>Bo</p>
+           <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
+          </div>
+        </div>
+        <div class="col-sm-9">
+          <div class="well">
+            <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="well">
+           <p>Jane</p>
+           <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
+          </div>
+        </div>
+        <div class="col-sm-9">
+          <div class="well">
+            <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="well">
+           <p>Anja</p>
+           <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
+          </div>
+        </div>
+        <div class="col-sm-9">
+          <div class="well">
+            <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
+          </div>
+        </div>
+      </div>     
+    </div>
+    <div class="col-sm-2 well">
+      <div class="thumbnail">
+        <p>Upcoming Events:</p>
+        <img src="paris.jpg" alt="Paris" width="400" height="300">
+        <p><strong>Paris</strong></p>
+        <p>Fri. 27 November 2015</p>
+        <button class="btn btn-primary">Info</button>
+      </div>      
+      <div class="well">
+        <p>ADS</p>
+      </div>
+      <div class="well">
+        <p>ADS</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="container-fluid text-center">
+  <p>Footer Text</p>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="node_modules/web3/dist/web3.min.js"></script>
+<script type="text/javascript" src="src/utils.js"></script>
+<script type="text/javascript" src="src/index.js"></script>
+</body>
+</html>
