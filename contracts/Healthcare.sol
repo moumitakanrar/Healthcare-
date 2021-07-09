@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity >= 0.4.22 < 0.9 .0;
+pragma solidity >= 0.5 .0 < 0.9 .0;
 
 //0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2
 //0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db
@@ -18,7 +18,8 @@ contract Healthcare {
         bool exist;
 
     }
-
+    
+    event ReturnValue(string _status, string _msg);
 
     mapping(uint256 => Prescription) public PrescriptionList;
 
@@ -102,27 +103,23 @@ contract Healthcare {
      **
      */
 
-    function addPatient(address patientAddr, uint256 _aadhaar) external returns(string memory _status, string memory _msg) {
+    function addPatient(address patientAddr, uint256 _aadhaar) external{
 
         if (msg.sender != admin) {
 
-            _status = "fail";
-            _msg = "Only admin can add";
-            return (_status, _msg);
+            emit ReturnValue("fail", "Only admin can add");
+            return;
 
         } else if (PatientList[patientAddr].exist == true) {
 
-            _status = "fail";
-            _msg = "Patient already exists!";
-            return (_status, _msg);
+            emit ReturnValue("fail", "Patient already exists!");
+            return;
 
         }
         PatientList[patientAddr].aadhaar = _aadhaar;
         PatientList[patientAddr].exist = true;
 
-        _status = "success";
-        _msg = "Patient Successfully added!";
-        return (_status, _msg);
+        emit ReturnValue("success", "Patient Successfully added!");
 
     }
 
@@ -136,17 +133,16 @@ contract Healthcare {
         PatientList[msg.sender].emergencyContact = _emergencyContact;
     }
     */
-    function resetOTP(string calldata _otp) external returns(string memory _status, string memory _msg) {
+    function resetOTP(string calldata _otp) external {
 
         if (PatientList[msg.sender].exist != true) {
-            _status = "fail";
-            _msg = "patient not  exists";
-            return (_status, _msg);
+            emit ReturnValue("fail", "patient not  exists!");
+            return;
         }
+        
         PatientList[msg.sender].otp = keccak256(abi.encodePacked(_otp, msg.sender));
-        _status = "success";
-        _msg = "OTP has been reset successfully!";
-        return (_status, _msg);
+        emit ReturnValue("success", "OTP has been reset successfully!");
+        return;
     }
 
     /*function getPatDetails(address patientAddr) public view returns(uint256 _aadhaar, string memory _name, string memory _dob,
@@ -187,21 +183,19 @@ contract Healthcare {
      **
      */
 
-    function addDoctor(address _docAddr, string calldata _RegNo, string calldata _medCouncilName, string calldata _name, string calldata _areaExpertize, uint256 _contactNo) external returns(string memory _status, string memory _msg){
+    function addDoctor(address _docAddr, string calldata _RegNo, string calldata _medCouncilName, string calldata _name, string calldata _areaExpertize, uint256 _contactNo) external{
        
         if (msg.sender != admin) {
-            _status = "fail";
-            _msg = "Only admin can register a doctor!";
-            return (_status, _msg);
+            emit ReturnValue("fail", "Only admin can register a doctor!");
+            return;
+            
         }else if (DoctorList[_docAddr].exist == true) {
-            _status = "fail";
-            _msg = "Doctor already exists";
-            return (_status, _msg);
+            emit ReturnValue("fail", "Doctor already exists");
+            return;
         }
         DoctorList[_docAddr] = Doctor(_RegNo, _medCouncilName, _name, _areaExpertize, _contactNo, true);
-        _status = "success";
-        _msg = "Doctor has been added successfully!";
-        return (_status, _msg);
+        emit ReturnValue("success", "Doctor has been added successfully!");
+        return;
         
         
     }
@@ -246,25 +240,23 @@ contract Healthcare {
      **
      */
 
-    function addPharmacy(address _pharmAddr, string calldata _RegNo, string calldata _name, uint256 _contactNo) external returns(string memory _status, string memory _msg) {
+    function addPharmacy(address _pharmAddr, string calldata _RegNo, string calldata _name, uint256 _contactNo) external{
 
         if (msg.sender != admin) {
 
-            _status = "fail";
-            _msg = "Only admin can add";
-            return (_status, _msg);
+            emit ReturnValue("fail", "Only admin can add");
+            return;
+            
 
         } else if (PharmacyList[_pharmAddr].exist == true) {
 
-            _status = "fail";
-            _msg = "Pharmacy already exists!";
-            return (_status, _msg);
+            emit ReturnValue("fail", "Pharmacy already exists!");
+            return;
         }
 
         PharmacyList[_pharmAddr] = Pharmacy(_RegNo, _name, _contactNo, true);
-        _status = "success";
-        _msg = "Pharmacy Successfully added!";
-        return (_status, _msg);
+        emit ReturnValue("success", "Pharmacy Successfully added!");
+        return;
     }
 
     event PrescriptionEvent(
@@ -295,20 +287,18 @@ contract Healthcare {
      **
      */
 
-    function addPrescription(address _patientAddr, string memory _patOtp, string memory _prescription) public returns(string memory _status, string memory _msg){
+    function addPrescription(address _patientAddr, string calldata _patOtp, string calldata _prescription) external{
         
         
         if (DoctorList[msg.sender].exist != true) {
 
-            _status = "fail";
-            _msg = "You are not a doctor";
-            return (_status, _msg);
+            emit ReturnValue("fail", "You are not a doctor!");
+            return;
 
         }else  if (PatientList[_patientAddr].otp != keccak256(abi.encodePacked(_patOtp, _patientAddr))) {
 
-            _status = "fail";
-            _msg = "Invalid OTP";
-            return (_status, _msg);
+            emit ReturnValue("fail", "Invalid OTP");
+            return;
 
         }  
 
@@ -324,9 +314,8 @@ contract Healthcare {
         PatientList[_patientAddr].prescriptions.push(prescriptionID);
         emit PrescriptionEvent(msg.sender, _patientAddr, prescriptionID);
         
-        _status = "success";
-        _msg = "Prescription Successfully added!";
-        return (_status, _msg);
+        emit ReturnValue("success", "Prescription Successfully added!");
+        return;
     }
 
 
@@ -348,32 +337,28 @@ contract Healthcare {
      **
      */
 
-    function editPrescription(uint256 _prescriptionID, string memory _prescriptionOtp, address _patientAddr, string memory _prescription) public returns(string memory _status, string memory _msg){
+    function editPrescription(uint256 _prescriptionID, string memory _prescriptionOtp, address _patientAddr, string memory _prescription) public {
       
         if (DoctorList[msg.sender].exist != true) {
 
-            _status = "fail";
-            _msg = "You are authorized to view this.";
-            return (_status, _msg);
+            emit ReturnValue("fail", "You are authorized to view this!");
+            return;
 
         }else  if (PrescriptionList[_prescriptionID].key != keccak256(abi.encodePacked(_patientAddr, msg.sender))) {
 
-            _status = "fail";
-            _msg = "Key verification failed";
-            return (_status, _msg);
+            emit ReturnValue("fail", "Key verification failed!");
+            return;
 
         }else  if (PatientList[_patientAddr].otp != keccak256(abi.encodePacked(_prescriptionOtp, _patientAddr))) {
 
-            _status = "fail";
-            _msg = "Invalid OTP";
-            return (_status, _msg);
+            emit ReturnValue("fail", "Invalid OTP!");
+            return;
 
         }    
 
         PrescriptionList[_prescriptionID].prescription = _prescription;
-        _status = "success";
-        _msg = "Prescription has been edited successfully!";
-       return (_status, _msg);
+        emit ReturnValue("success", "Prescription has been edited successfully!");
+       return;
     }
 
 
@@ -394,27 +379,24 @@ contract Healthcare {
      **
      */
 
-    function resetPrescriptionOTP(address _docAddr, uint256 _prescriptionID, string calldata _otp) external returns(string memory _status, string memory _msg){
+    function resetPrescriptionOTP(address _docAddr, uint256 _prescriptionID, string calldata _otp) external{
 
         if (PatientList[msg.sender].exist != true) {
 
-            _status = "fail";
-            _msg = "patient not  exists";
-            return (_status, _msg);
+            emit ReturnValue("fail", "patient not  exists!");
+            return;
 
         }else  if (PrescriptionList[_prescriptionID].key !=  keccak256(abi.encodePacked(msg.sender, _docAddr))) {
 
-            _status = "fail";
-            _msg = "Key verification failed";
-            return (_status, _msg);
+            emit ReturnValue("fail", "Key verification failed!");
+            return;
 
         }
 
         PrescriptionList[_prescriptionID].otp = keccak256(abi.encodePacked(_otp, msg.sender));
         
-        _status = "success";
-        _msg = "Prescription OTP reset successfully!";
-        return (_status, _msg);
+        emit ReturnValue("success", "Prescription OTP reset successfully!");
+        return;
 
     }
 
@@ -435,26 +417,23 @@ contract Healthcare {
      **
      */
 
-    function addAuthPerson(address _docAddr, uint256 _prescriptionID, address _authrizedPerson) external returns(string memory _status, string memory _msg){
+    function addAuthPerson(address _docAddr, uint256 _prescriptionID, address _authrizedPerson) external{
        
         if (PatientList[msg.sender].exist != true) {
 
-            _status = "fail";
-            _msg = "patient not  exists";
-            return (_status, _msg);
+            emit ReturnValue("fail", "patient not  exists!");
+            return;
 
         }else  if (PrescriptionList[_prescriptionID].key !=  keccak256(abi.encodePacked(msg.sender, _docAddr))) {
 
-            _status = "fail";
-            _msg = "Key verification failed";
-            return (_status, _msg);
+            emit ReturnValue("fail", "Key verification failed!");
+            return;
 
         }
         PrescriptionList[_prescriptionID].authorizedPersons.push(_authrizedPerson);
         
-        _status = "success";
-        _msg = "Authorized person added successfully!";
-        return (_status, _msg);
+        emit ReturnValue("success", "Prescription OTP reset successfully!");
+        return;
 
     }
 

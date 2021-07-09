@@ -17,6 +17,17 @@ const updateGreeting = (healthcare, contract, accounts) => {
   });
 };
 */
+async function myAlert(message,status){
+  if(status=="success"){
+    type = "success"
+  }else{
+    type = "danger"
+  }
+var wrapper = document.createElement("div");
+wrapper.innerHTML = '<div class="alert alert-'+type+' fade in" role="alert" data-dismiss="alert" >'+message+'</div>'
+document.getElementById("msg-box").appendChild(wrapper);
+}
+
 const addPatient = async (healthcare, contract, accounts)=>{
   let patientAddr,aadhaar,name,dob, gender, bloodGroup, emergencyContact;
 
@@ -25,22 +36,22 @@ const addPatient = async (healthcare, contract, accounts)=>{
 
   patientAddr = $("#patAddress").val();
   aadhaar = $("#patAadhar").val();
-  //name = $("#patName").val();
-  //dob = $("#patDob").val();
-  //gender = $("#patGender").val();
-  //bloodGroup = $("#patBloodGroup").val();
-  //emergencyContact = $("#patEmergencyContact").val();
-
-
   console.log(dob);
   console.log(accounts[0]);
   var myAcc = accounts[0];
   var myAccount = myAcc.toUpperCase();
-    await contract.methods
+  const receipt = await contract.methods
       .addPatient(patientAddr,aadhaar)
       //.addPatient(patientAddr,aadhaar,name,dob, gender, bloodGroup, emergencyContact)
       .send({ from: myAccount, gas: 4500000});
+  contract.getPastEvents("ReturnValue", { fromBlock: 0 , toBlock: 'latest'}).then((events) =>{ 
+    var event1 = events[events.length-1].returnValues;
     
+    myAlert(event1._msg, event1._status);
+    console.log(event1);
+  });
+  $("#addPatForm")[0].reset();
+
 });
 };
 
@@ -88,49 +99,133 @@ const addPharmacy = async (healthcare, contract, accounts)=>{
     
 });
 }; 
-
+/*
 
 const isAdmin = async (healthcare, contract, accounts)=>{
    await contract.methods
       .isAdmin().call().then((result) => {
-        console.log(result);
-        $( ".dashboard-1" ).show();
-        $( ".dashboard-2" ).hide();
-        $( ".dashboard-3" ).hide();
-        $( ".dashboard-4" ).hide();
+        if(result._status=="success"){
+          console.log(result);
+          $(".dashboard-1").show();
+          $(".dashboard-2").hide();
+          $(".dashboard-3").hide();
+          $(".dashboard-4").hide();
+      }
       });
-}; 
+}; */
 const isDoctor = async (healthcare, contract, accounts)=>{
+  var myAcc = accounts[0];
+  var myAccount = myAcc.toUpperCase();
    await contract.methods
-      .isDoctor().call().then((result) => {
-        console.log(result);
-        $( ".dashboard-2" ).show();
-        $( ".dashboard-1" ).hide();
-        $( ".dashboard-3" ).hide();
-        $( ".dashboard-4" ).hide();
+      .isDoctor().call({ from: myAccount}).then((result) => {
+        
+        if(result._status=="success"){
+          console.log(result);
+          $(".dashboard-3").show();
+          $(".dashboard-1").hide();
+          $(".dashboard-2").hide();
+          $(".dashboard-4").hide();
+        }
       });
+
+        
 }; 
 const isPatient = async (healthcare, contract, accounts)=>{
+   var myAcc = accounts[0];
+  var myAccount = myAcc.toUpperCase();
    await contract.methods
-      .isPatient().call().then((result) => {
-        console.log(result);
-        $( ".dashboard-3" ).show();
-        $( ".dashboard-1" ).hide();
-        $( ".dashboard-2" ).hide();
-        $( ".dashboard-4" ).hide();
+      .isPatient().call({ from: myAccount}).then((result) => {
+        
+        if(result._status=="success"){
+          console.log(result);
+          $(".dashboard-2").show();
+          $(".dashboard-1").hide();
+          $(".dashboard-3").hide();
+          $(".dashboard-4").hide();
+        }
       });
 }; 
 const isPharmacy = async (healthcare, contract, accounts)=>{
+   var myAcc = accounts[0];
+  var myAccount = myAcc.toUpperCase();
    await contract.methods
-      .isPharmacy().call().then((result) => {
-        console.log(result);
-        $( ".dashboard-4" ).show();
-        $( ".dashboard-1" ).hide();
-        $( ".dashboard-2" ).hide();
-        $( ".dashboard-3" ).hide();
+      .isPharmacy().call({ from: myAccount}).then((result) => {
+        if(result._status=="success"){
+          console.log(result);
+          $(".dashboard-4").show();
+          $(".dashboard-1").hide();
+          $(".dashboard-2").hide();
+          $(".dashboard-3").hide();
+        }
       });
 }; 
 
+const isAdmin = async (healthcare, contract, accounts)=>{
+  var myAcc = accounts[0];
+  var myAccount = myAcc.toUpperCase();
+   await contract.methods
+      .isAdmin().call({ from: myAccount}).then((result) => {
+        if(result._status=="success"){
+          console.log(result);
+          $(".dashboard-1").show();
+          $(".dashboard-2").hide();
+          $(".dashboard-3").hide();
+          $(".dashboard-4").hide();
+      }
+      });
+}; 
+/*
+const resetPatientOTP = async (healthcare, contract, accounts)=>{
+  let patOTP1;
+
+ $("#patientOtpReset").on("submit", async (e) => {
+    e.preventDefault();
+
+  patOTP1 = $("#patOTP1").val();
+  
+  console.log(accounts[0]);
+  var myAcc = accounts[0];
+  var myAccount = myAcc.toUpperCase();
+    await contract.methods
+      .resetOTP(patOTP1)
+      .send({ from: myAccount, gas: 4500000}, function (err, res) {
+    if (err) {
+      console.log("An error occured", err);
+      return;
+    }
+    console.log("Hash of the transaction: " + res);
+    myAlert(res);
+  });
+    
+});
+};  
+*/
+const resetPatientOTP = async (healthcare, contract, accounts)=>{
+  let patOTP1;
+
+ $("#patientOtpReset").on("submit", async (e) => {
+    e.preventDefault();
+
+  patOTP1 = $("#patOTP1").val();
+ 
+
+  console.log(patOTP1);
+  console.log(accounts[0]);
+  var myAcc = accounts[0];
+  var myAccount = myAcc.toUpperCase();
+  await contract.methods
+      .resetOTP(patOTP1)
+      .send({ from: myAccount, gas: 4500000}, function (err, res) {
+    if (err) {
+      console.log("An error occured", err);
+      return;
+    }
+    console.log("Hash of the transaction: " + res);
+    myAlert(res,"success");
+  });
+    
+});
+};
 async function healthcareApp() {
   const web3 = await getWeb3();
   const accounts = await web3.eth.getAccounts();
@@ -146,10 +241,13 @@ async function healthcareApp() {
   addPatient(healthcareData, contract, accounts);
   addDoctor(healthcareData, contract, accounts);  
   addPharmacy(healthcareData, contract, accounts);
-  isAdmin(healthcareData, contract, accounts);
+  //
   isDoctor(healthcareData, contract, accounts);
   isPatient(healthcareData, contract, accounts);
   isPharmacy(healthcareData, contract, accounts);
+  isAdmin(healthcareData, contract, accounts);
+ 
+  resetPatientOTP(healthcareData, contract, accounts);
  
 
 }
