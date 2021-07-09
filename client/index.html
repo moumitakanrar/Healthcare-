@@ -5,19 +5,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+  <link rel="stylesheet" href="src/style.css">
+
   
-  <style>    
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-    }
-  </style>
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -33,9 +28,7 @@
       <ul class="nav navbar-nav">
 
           <li><li><a href="#"><i  class="text-info">M.TECH PROJECT BY MOUMITA KANRAR</i></a></li>
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Messages</a></li>
-        
+       
       
       </ul>
       <!--
@@ -57,34 +50,18 @@
   </div>
 </nav>
   
-<div class="container text-center">    
+<div class="container text-center"  style="padding-top: 75px">  
+<div class="row" id="msg-box">
+  </div>
   <div class="row">
     <div class="col-sm-3 well">
       <div class="well">
-        <p>My Profile</p>
-        <p>Balance: <i id="myBalance"></i></p>
+        <h3><strong style="color: #292983;">My Profile</strong></h3>
+        <p><strong>Balance: <i id="myBalance"></i></strong></p>
       </div>
-      <div class="well">
-        <p><a href="#">Interests</a></p>
-        <p>
-          <span class="label label-default">News</span>
-          <span class="label label-primary">W3Schools</span>
-          <span class="label label-success">Labels</span>
-          <span class="label label-info">Football</span>
-          <span class="label label-warning">Gaming</span>
-          <span class="label label-danger">Friends</span>
-        </p>
-      </div>
-      <div class="alert alert-success fade in">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-        <p><strong>Ey!</strong></p>
-        People are looking at your profile. Find out who.
-      </div>
-      <p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>
+      
     </div>
-    <div class="col-sm-7">
+    <div class="col-sm-9">
     
       <div class="row dashboard-1">
         <div class="col-sm-12">
@@ -245,12 +222,12 @@
       <div class="row  dashboard-3">
         <div class="col-sm-12">
           <div class="panel panel-default text-left">
-            <div class="panel-heading">Patient OTP Reset</div>
+            <div class="panel-heading"> OTP Reset</div>
             <div class="panel-body">              
-              <form id="patientOtpReset">
+              <form id="">
                 <div class="form-group">
-                  <label for="OTP">Patient OTP:</label>
-                  <input type="text" class="form-control" id="patOTP">
+                  <label for="patOTP1"> OTP:</label>
+                  <input type="text" class="form-control" id="patOTP1">
                 </div>              
                 <button type="submit" class="btn btn-default">Submit</button>
               </form>
@@ -260,9 +237,9 @@
 
         <div class="col-sm-12">
           <div class="panel panel-default text-left">
-            <div class="panel-heading">Prescription OTP Reset</div>
+            <div class="panel-heading"> OTP Reset</div>
             <div class="panel-body">              
-              <form id="prescriptionOtpReset">
+              <form id="">
                 <div class="form-group">
                   <label for="OTP">Prescription OTP:</label>
                   <input type="text" class="form-control" id="patPrescriptionOTP">
@@ -274,83 +251,18 @@
         </div>
       </div> 
 
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="well">
-           <p>John</p>
-           <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-          </div>
-        </div>
-        <div class="col-sm-9">
-          <div class="well">
-            <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="well">
-           <p>Bo</p>
-           <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-          </div>
-        </div>
-        <div class="col-sm-9">
-          <div class="well">
-            <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="well">
-           <p>Jane</p>
-           <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-          </div>
-        </div>
-        <div class="col-sm-9">
-          <div class="well">
-            <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="well">
-           <p>Anja</p>
-           <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-          </div>
-        </div>
-        <div class="col-sm-9">
-          <div class="well">
-            <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-          </div>
-        </div>
-      </div>     
+    
     </div>
-    <div class="col-sm-2 well">
-      <div class="thumbnail">
-        <p>Upcoming Events:</p>
-        <img src="paris.jpg" alt="Paris" width="400" height="300">
-        <p><strong>Paris</strong></p>
-        <p>Fri. 27 November 2015</p>
-        <button class="btn btn-primary">Info</button>
-      </div>      
-      <div class="well">
-        <p>ADS</p>
-      </div>
-      <div class="well">
-        <p>ADS</p>
-      </div>
-    </div>
+   
   </div>
 </div>
 
 <footer class="container-fluid text-center">
-  <p>Footer Text</p>
+  <p></p>
 </footer>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <script type="text/javascript" src="node_modules/web3/dist/web3.min.js"></script>
 <script type="text/javascript" src="src/utils.js"></script>
 <script type="text/javascript" src="src/index.js"></script>

@@ -1,0 +1,23 @@
+ /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+      
+    }
+
+    body{
+
+      background-image: url('../healthcare-bg.jpg');
+    }
+    .panel,.well{
+      background: #d0e9f1;
+    }
+
+    .panel-default>.panel-heading {
+    color: #292983;
+    font-weight: 700;
+    font-size: 18px;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}
