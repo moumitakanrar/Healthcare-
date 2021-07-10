@@ -349,7 +349,7 @@ contract Healthcare {
             emit ReturnValue("fail", "Key verification failed!");
             return;
 
-        }else  if (PatientList[_patientAddr].otp != keccak256(abi.encodePacked(_prescriptionOtp, _patientAddr))) {
+        }else  if (PrescriptionList[_prescriptionID].otp != keccak256(abi.encodePacked(_prescriptionOtp, _patientAddr))) {
 
             emit ReturnValue("fail", "Invalid OTP!");
             return;
@@ -460,8 +460,7 @@ contract Healthcare {
     function getPrescription(address _patientAddr, uint256 _prescriptionID, string memory _otp) public view returns(string memory _prescription, string memory _status, string memory _msg) {
         
         _prescription = "";
-        if (DoctorList[msg.sender].exist != true || PharmacyList[msg.sender].exist != true || PatientList[msg.sender].exist != true) {
-
+        if (!(DoctorList[msg.sender].exist==true || PharmacyList[msg.sender].exist==true || PatientList[msg.sender].exist==true)) {
             _status = "fail";
             _msg = "You are not authorized!";
             return (_prescription, _status, _msg);

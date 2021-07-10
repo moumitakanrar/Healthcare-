@@ -175,7 +175,7 @@
           <div class="panel panel-default text-left">
             <div class="panel-heading">Prescription OTP Reset</div>
             <div class="panel-body">              
-              <form id="prescriptionOtpReset">
+              <form id="resetPrescriptionOTP">
                 <div class="form-group">
                   <label for="docAddress1">Doctor Address:</label>
                   <input type="text" class="form-control" id="docAddress1">
@@ -222,13 +222,21 @@
       <div class="row  dashboard-3">
         <div class="col-sm-12">
           <div class="panel panel-default text-left">
-            <div class="panel-heading"> OTP Reset</div>
+            <div class="panel-heading">Add Prescription</div>
             <div class="panel-body">              
-              <form id="">
+              <form id="addPrescription">
                 <div class="form-group">
-                  <label for="patOTP1"> OTP:</label>
-                  <input type="text" class="form-control" id="patOTP1">
-                </div>              
+                  <label for="patAddress2">Patient Address:</label>
+                  <input type="text" class="form-control" id="patAddress2">
+                </div>
+                <div class="form-group">
+                  <label for="patOTP2">Patient OTP:</label>
+                  <input type="text" class="form-control" id="patOTP2">
+                </div>   
+                <div class="form-group">
+                  <label for="prescription">Prescription:</label>
+                  <input type="text" class="form-control" id="prescription">
+                </div>        
                 <button type="submit" class="btn btn-default">Submit</button>
               </form>
             </div>
@@ -237,20 +245,60 @@
 
         <div class="col-sm-12">
           <div class="panel panel-default text-left">
-            <div class="panel-heading"> OTP Reset</div>
+            <div class="panel-heading">Edit Prescription</div>
             <div class="panel-body">              
-              <form id="">
+              <form id="editPrescription">
                 <div class="form-group">
-                  <label for="OTP">Prescription OTP:</label>
-                  <input type="text" class="form-control" id="patPrescriptionOTP">
-                </div>              
+                  <label for="prescriptionId3">Prescription ID:</label>
+                  <input type="text" class="form-control" id="prescriptionId3">
+                </div>
+                <div class="form-group">
+                  <label for="patAddress3">Patient Address:</label>
+                  <input type="text" class="form-control" id="patAddress3">
+                </div>
+                <div class="form-group">
+                  <label for="presOTP2">Prescription OTP:</label>
+                  <input type="text" class="form-control" id="presOTP2">
+                </div>   
+                <div class="form-group">
+                  <label for="prescription2">Prescription:</label>
+                  <input type="text" class="form-control" id="prescription2">
+                </div>        
                 <button type="submit" class="btn btn-default">Submit</button>
               </form>
             </div>
           </div>
         </div>
+       
       </div> 
 
+       <div class="row  dashboard-all">
+        <div class="col-sm-12">
+          <div class="panel panel-default text-left">
+            <div class="panel-heading">Get Prescription</div>
+            <div class="panel-body">              
+              <form id="getPrescription">
+                <div class="form-group">
+                  <label for="patAddress5">Patient Address:</label>
+                  <input type="text" class="form-control" id="patAddress5">
+                </div>
+                <div class="form-group">
+                  <label for="prescriptionId5">Prescription ID:</label>
+                  <input type="text" class="form-control" id="prescriptionId5">
+                </div>
+                <div class="form-group">
+                  <label for="presOTP5">Prescription OTP:</label>
+                  <input type="text" class="form-control" id="presOTP5">
+                </div>             
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form>
+            </div>
+            <div class="panel-body"> 
+              <p id="prescriptionDetails"></p>
+            </div>
+          </div>
+        </div>
+      </div>
     
     </div>
    
